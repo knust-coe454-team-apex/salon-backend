@@ -2,13 +2,15 @@ import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
 import { db } from "./db";
 import { sql } from "drizzle-orm";
+import { authRoutes } from "./routes/auth";
 
 const app = new Elysia()
   .use(cors())
+  .use(authRoutes)
   .get("/", () => ({
     name: "Salon Backend API",
     status: "running",
-    version: "0.2.0",
+    version: "0.3.0",
   }))
   .get("/health", async () => {
     try {
