@@ -12,7 +12,7 @@ const app = new Elysia()
     status: "ok",
     timestamp: new Date().toISOString(),
   }))
-  .listen(process.env.PORT || 3000);
+  .listen({ port: Number(process.env.PORT) || 3000, hostname: "0.0.0.0" });
 
 console.log(`Salon backend running at http://localhost:${app.server?.port}`);
 
