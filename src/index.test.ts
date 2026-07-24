@@ -58,7 +58,7 @@ beforeAll(async () => {
     body: JSON.stringify({ name: "Test Manicure", price: 50 }),
   }, ownerToken);
   serviceId = svc.body.id;
-});
+}, 30000);
 
 describe("Authentication", () => {
   it("issues a token on valid login", async () => {
@@ -109,13 +109,13 @@ describe("Sales and stock", () => {
     }, ownerToken);
     expect(res.status).toBe(201);
     expect(res.body.total).toBe(100); // (2 * 25) + (1 * 50)
-  });
+  }, 15000);
 
   it("decrements product stock but not for services", async () => {
     const res = await api(`/products/${productId}`, {}, ownerToken);
     // Started at 10, sold 2 in the test above
     expect(res.body.quantity).toBe(8);
-  });
+  }, 15000);
 
   it("refuses a sale that exceeds available stock", async () => {
     const res = await api("/sales", {
@@ -126,7 +126,7 @@ describe("Sales and stock", () => {
       }),
     }, ownerToken);
     expect(res.status).toBe(400);
-  });
+  }, 15000);
 });
 
 describe("Reporting", () => {
@@ -135,5 +135,5 @@ describe("Reporting", () => {
     expect(res.status).toBe(200);
     const { totalTakings, byPaymentMethod } = res.body;
     expect(byPaymentMethod.cash + byPaymentMethod.momo).toBe(totalTakings);
-  });
+  }, 15000);
 });

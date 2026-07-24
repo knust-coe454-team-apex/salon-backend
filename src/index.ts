@@ -9,6 +9,7 @@ import { customerRoutes, supplierRoutes } from "./routes/contacts";
 import { saleRoutes } from "./routes/sales";
 import { reportRoutes } from "./routes/reports";
 import { dashboardRoutes } from "./routes/dashboard";
+import { expenseRoutes } from "./routes/expenses";
 
 const app = new Elysia()
   .use(cors())
@@ -20,10 +21,11 @@ const app = new Elysia()
   .use(saleRoutes)
   .use(reportRoutes)
   .use(dashboardRoutes)
+  .use(expenseRoutes)
   .get("/", () => ({
     name: "Salon Backend API",
     status: "running",
-    version: "0.6.0",
+    version: "0.7.0",
   }))
   .get("/health", async () => {
     try {
